@@ -1,0 +1,132 @@
+body {
+  background: linear-gradient(90deg, rgb(51, 1, 63), rgb(4, 73, 78));
+}
+
+/* form */
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 9;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px;
+}
+
+.search-form input {
+  width: 280px;
+  padding: 5px;
+  border: none;
+  border: 1px solid grey;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none;
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.6);
+}
+
+.search-form input:focus {
+  outline: none;
+}
+
+.search-form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  padding: 5px;
+  border: 1px solid grey;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-left: none;
+  background: #f1f1f1;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.6);
+}
+
+.search-form button:hover {
+  background-color: #c3c3c3;
+  transform: scale(1.05);
+}
+
+/* gallery */
+
+.gallery {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* card */
+
+.photo-card {
+  position: relative;
+  z-index: 2;
+  width: 240px;
+  height: 160px;
+  margin: 15px;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  cursor: context-menu;
+}
+
+.gallery-img,
+.info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+
+.gallery-img {
+  border: 1px solid #000000;
+}
+
+.info {
+  border: 1px solid #ffffff;
+  background: linear-gradient(45deg, rgb(245, 218, 129), rgb(47, 245, 195));
+  transform: rotateY(180deg);
+}
+
+/* .photo-card.hovered .gallery-img {
+  transform: rotateY(-180deg);
+}
+
+.photo-card.hovered .info {
+  transform: rotateY(0deg);
+} */
+
+.photo-card:hover .gallery-img {
+  transform: rotateY(-180deg);
+}
+
+.photo-card:hover .info {
+  transform: rotateY(0deg);
+}
+
+.info-item {
+  margin-left: 15px;
+}
+
+/* to-up */
+
+.to-up {
+  z-index: 9;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  background: #f1f1f1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.to-up:hover {
+  background-color: #c3c3c3;
+  transform: scale(1.05);
+}
