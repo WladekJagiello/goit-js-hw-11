@@ -8,7 +8,7 @@ body {
   display: flex;
   justify-content: center;
   position: fixed;
-  z-index: 9;
+  z-index: 99;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -33,7 +33,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 40px;
-  padding: 5px;
+  padding: 7px;
   border: 1px solid grey;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -52,7 +52,7 @@ body {
 
 .gallery {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: 20px;
 }
@@ -61,10 +61,9 @@ body {
 
 .photo-card {
   position: relative;
-  /* z-index: 2; */
   width: 240px;
   height: 160px;
-  margin: 15px;
+  margin: 10px;
   transform-style: preserve-3d;
   perspective: 800px;
   cursor: context-menu;
@@ -73,8 +72,8 @@ body {
 .gallery-img,
 .info {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 240px;
+  height: 160px;
   border-radius: 5px;
   backface-visibility: hidden;
   transform-style: preserve-3d;
@@ -99,12 +98,8 @@ body {
   transform: rotateY(0deg);
 }
 
-.photo-card:hover .gallery-img {
-  transform: rotateY(-180deg);
-}
-
-.photo-card:hover .info {
-  transform: rotateY(0deg);
+.photo-card.hovered {
+  z-index: 9;
 }
 
 .info-item {

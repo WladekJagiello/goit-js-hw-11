@@ -1,11 +1,10 @@
-// import './css/style.css';
 import Notiflix from 'notiflix';
 import { fetchImages } from './js/fetch';
 import { createGallery } from './js/markup';
 
 const particlesEl = document.querySelector('#particles-js');
 particlesEl.style.cssText =
-  'position: fixed; z-index: 1; width: 100%; height: 100vh;';
+  'position: fixed; z-index: 2; width: 100%; height: 100%';
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
 const toUpEl = document.querySelector('.to-up');
@@ -37,7 +36,7 @@ formEl.addEventListener('submit', elem => {
     });
 });
 
-window.addEventListener('scroll', () => {
+document.addEventListener('scroll', () => {
   const documentRect = document.documentElement.getBoundingClientRect();
   if (documentRect.bottom < document.documentElement.clientHeight + 750) {
     page += 1;

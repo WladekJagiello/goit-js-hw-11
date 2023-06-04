@@ -3,7 +3,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 export function createGallery(images) {
   const galleryEl = document.querySelector('.gallery');
-  const photoCards = images
+  const card = images
     .filter(image => image !== null)
     .map(image => {
       return `<div class="photo-card">
@@ -11,49 +11,42 @@ export function createGallery(images) {
                   <img class="gallery-img" src="${image.webformatURL}" alt="${image.tags}" loading="lazy"/>  
 
                   <div class="info">
-                    <p class="info-item"><b>Likes: </b> ${image.likes}</p>
-                    <p class="info-item"><b>Views: </b> ${image.views}</p>
-                    <p class="info-item"><b>Comments: </b> ${image.comments}</p>
-                    <p class="info-item"><b>Downloads: </b> ${image.downloads}</p>
+                    <p class="info-item"><b>Лайки: </b> ${image.likes}</p>
+                    <p class="info-item"><b>Перегляди: </b> ${image.views}</p>
+                    <p class="info-item"><b>Коментарі: </b> ${image.comments}</p>
+                    <p class="info-item"><b>Завантаження: </b> ${image.downloads}</p>
                   </div>
                 </a>
               </div>`;
     })
     .join('');
 
-  galleryEl.innerHTML += photoCards;
+  galleryEl.innerHTML += card;
 
-  // const photoCardEls = document.querySelectorAll('.photo-card');
+  document.addEventListener('mousemove', function (event) {
+    const cardEls = document.querySelectorAll('.photo-card');
+    var mouseX = event.clientX;
+    var mouseY = event.clientY;
 
-  // photoCardEls.forEach(cardEl => {
-  //   const mouseEnterEvent = new Event('mouseenter', {
-  //     bubbles: true,
-  //     cancelable: true,
-  //   });
+    cardEls.forEach(cardEl => {
+      var elementRect = cardEl.getBoundingClientRect();
+      var elementX = elementRect.left;
+      var elementY = elementRect.top;
+      var elementWidth = elementRect.width;
+      var elementHeight = elementRect.height;
 
-  //   cardEl.dispatchEvent(mouseEnterEvent);
-
-  //   const mouseLeaveEvent = new Event('mouseleave', {
-  //     bubbles: true,
-  //     cancelable: true,
-  //   });
-
-  //   cardEl.dispatchEvent(mouseLeaveEvent);
-  // });
-
-  // hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-
-  // const photoCardEls = document.querySelectorAll('.photo-card');
-
-  // photoCardEls.forEach(cardEl => {
-  //   cardEl.addEventListener('mouseenter', () => {
-  //     cardEl.classList.add('hovered');
-  //   });
-
-  //   cardEl.addEventListener('mouseleave', () => {
-  //     cardEl.classList.remove('hovered');
-  //   });
-  // });
+      if (
+        mouseX >= elementX &&
+        mouseX <= elementX + elementWidth &&
+        mouseY >= elementY &&
+        mouseY <= elementY + elementHeight
+      ) {
+        cardEl.classList.add('hovered');
+      } else {
+        cardEl.classList.remove('hovered');
+      }
+    });
+  });
 
   new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
