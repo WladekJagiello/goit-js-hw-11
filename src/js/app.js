@@ -52,11 +52,11 @@ particlesJS(
         },
       },
       size: {
-        value: 5,
+        value: 1,
         random: true,
         anim: {
           enable: false,
-          speed: 20,
+          speed: 10,
           size_min: 0.1,
           sync: false,
         },
@@ -70,7 +70,7 @@ particlesJS(
       },
       move: {
         enable: true,
-        speed: 25,
+        speed: 10,
         direction: 'none',
         random: false,
         straight: false,

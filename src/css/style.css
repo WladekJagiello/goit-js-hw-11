@@ -61,7 +61,7 @@ body {
 
 .photo-card {
   position: relative;
-  z-index: 2;
+  /* z-index: 2; */
   width: 240px;
   height: 160px;
   margin: 15px;
@@ -91,13 +91,13 @@ body {
   transform: rotateY(180deg);
 }
 
-/* .photo-card.hovered .gallery-img {
+.photo-card.hovered .gallery-img {
   transform: rotateY(-180deg);
 }
 
 .photo-card.hovered .info {
   transform: rotateY(0deg);
-} */
+}
 
 .photo-card:hover .gallery-img {
   transform: rotateY(-180deg);
