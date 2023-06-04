@@ -2,9 +2,6 @@ import Notiflix from 'notiflix';
 import { fetchImages } from './js/fetch';
 import { createGallery } from './js/markup';
 
-const particlesEl = document.querySelector('#particles-js');
-particlesEl.style.cssText =
-  'position: fixed; z-index: 2; width: 100%; height: 100%';
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
 const toUpEl = document.querySelector('.to-up');

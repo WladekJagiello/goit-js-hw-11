@@ -2,6 +2,14 @@ body {
   background: linear-gradient(90deg, rgb(51, 1, 63), rgb(4, 73, 78));
 }
 
+#particles-js {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
 /* form */
 
 .search-form {
