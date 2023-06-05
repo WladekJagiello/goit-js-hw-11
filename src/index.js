@@ -5,6 +5,7 @@ import { createGallery } from './js/markup';
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
 const toUpEl = document.querySelector('.to-up');
+const toDownEl = document.querySelector('.to-down');
 const perPage = 40;
 let page = 1;
 let q;
@@ -43,9 +44,11 @@ document.addEventListener('scroll', () => {
   }
   if (window.pageYOffset < document.documentElement.clientHeight) {
     toUpEl.style.opacity = '0';
+    toDownEl.style.opacity = '0';
   }
   if (window.pageYOffset > document.documentElement.clientHeight) {
     toUpEl.style.opacity = '1';
+    toDownEl.style.opacity = '1';
   }
 });
 
