@@ -1,4 +1,5 @@
 import Notiflix from 'notiflix';
+import throttle from 'lodash.throttle';
 import { cardHover } from './js/hover';
 import { fetchImages } from './js/fetch';
 import { createGallery } from './js/markup';
@@ -36,26 +37,29 @@ formEl.addEventListener('submit', elem => {
     });
 });
 
-document.addEventListener('scroll', () => {
-  const toUpEl = document.querySelector('.to-up');
-  const toDownEl = document.querySelector('.to-down');
-  const documentRect = document.documentElement.getBoundingClientRect();
+document.addEventListener(
+  'scroll',
+  throttle(() => {
+    const toUpEl = document.querySelector('.to-up');
+    const toDownEl = document.querySelector('.to-down');
+    const documentRect = document.documentElement.getBoundingClientRect();
 
-  if (documentRect.bottom < document.documentElement.clientHeight + 750) {
-    page += 1;
-    fetchImages(q, page, perPage).then(({ data }) => {
-      createGallery(data.hits);
-    });
-  }
-  if (window.pageYOffset < document.documentElement.clientHeight) {
-    toUpEl.style.opacity = '0';
-    toDownEl.style.opacity = '0';
-  }
-  if (window.pageYOffset > document.documentElement.clientHeight) {
-    toUpEl.style.opacity = '1';
-    toDownEl.style.opacity = '1';
-  }
-});
+    if (documentRect.bottom < document.documentElement.clientHeight + 750) {
+      page += 1;
+      fetchImages(q, page, perPage).then(({ data }) => {
+        createGallery(data.hits);
+      });
+    }
+    if (window.pageYOffset < document.documentElement.clientHeight) {
+      toUpEl.style.opacity = '0';
+      toDownEl.style.opacity = '0';
+    }
+    if (window.pageYOffset > document.documentElement.clientHeight) {
+      toUpEl.style.opacity = '1';
+      toDownEl.style.opacity = '1';
+    }
+  }, 200)
+);
 
 cardHover();
 
