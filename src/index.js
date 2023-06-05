@@ -53,7 +53,25 @@ document.addEventListener('scroll', () => {
 });
 
 toUpEl.addEventListener('click', () => {
-  if (window.pageYOffset > 0) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  galleryScroll('up');
 });
+
+toDownEl.addEventListener('click', () => {
+  galleryScroll('down');
+});
+
+function galleryScroll(direction) {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  let scrollByN = cardHeight * 4;
+  if (direction === 'up') {
+    scrollByN = -scrollByN;
+  }
+
+  window.scrollBy({
+    top: scrollByN,
+    behavior: 'smooth',
+  });
+}

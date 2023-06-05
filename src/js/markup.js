@@ -25,15 +25,15 @@ export function createGallery(images) {
 
   document.addEventListener('mousemove', function (event) {
     const cardEls = document.querySelectorAll('.photo-card');
-    var mouseX = event.clientX;
-    var mouseY = event.clientY;
+    let mouseX = event.clientX;
+    let mouseY = event.clientY;
 
     cardEls.forEach(cardEl => {
-      var elementRect = cardEl.getBoundingClientRect();
-      var elementX = elementRect.left;
-      var elementY = elementRect.top;
-      var elementWidth = elementRect.width;
-      var elementHeight = elementRect.height;
+      let elementRect = cardEl.getBoundingClientRect();
+      let elementX = elementRect.left;
+      let elementY = elementRect.top;
+      let elementWidth = elementRect.width;
+      let elementHeight = elementRect.height;
 
       if (
         mouseX >= elementX &&
