@@ -1,6 +1,8 @@
 import Notiflix from 'notiflix';
+import { cardHover } from './js/hover';
 import { fetchImages } from './js/fetch';
 import { createGallery } from './js/markup';
+import { galleryScroll } from './js/scroll';
 
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
@@ -35,7 +37,10 @@ formEl.addEventListener('submit', elem => {
 });
 
 document.addEventListener('scroll', () => {
+  const toUpEl = document.querySelector('.to-up');
+  const toDownEl = document.querySelector('.to-down');
   const documentRect = document.documentElement.getBoundingClientRect();
+
   if (documentRect.bottom < document.documentElement.clientHeight + 750) {
     page += 1;
     fetchImages(q, page, perPage).then(({ data }) => {
@@ -52,6 +57,8 @@ document.addEventListener('scroll', () => {
   }
 });
 
+cardHover();
+
 toUpEl.addEventListener('click', () => {
   galleryScroll('up');
 });
@@ -59,19 +66,3 @@ toUpEl.addEventListener('click', () => {
 toDownEl.addEventListener('click', () => {
   galleryScroll('down');
 });
-
-function galleryScroll(direction) {
-  const { height: cardHeight } = document
-    .querySelector('.gallery')
-    .firstElementChild.getBoundingClientRect();
-
-  let scrollByN = cardHeight * 4;
-  if (direction === 'up') {
-    scrollByN = -scrollByN;
-  }
-
-  window.scrollBy({
-    top: scrollByN,
-    behavior: 'smooth',
-  });
-}
