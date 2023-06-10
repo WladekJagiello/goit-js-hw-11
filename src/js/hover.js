@@ -1,5 +1,5 @@
 export function cardHover() {
-  const audio = new Audio('./skrip-odinochnyii-korotkii-nizkii.mp3');
+  const audio = new Audio('../skrip-odinochnyii-korotkii-nizkii.mp3');
   document.addEventListener('mousemove', event => {
     const cardEls = document.querySelectorAll('.photo-card');
     let mouseX = event.clientX;
