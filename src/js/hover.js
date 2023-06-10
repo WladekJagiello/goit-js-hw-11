@@ -1,7 +1,4 @@
 export function cardHover() {
-  const audio = document.getElementById('audio');
-  audio.volume = 0.3;
-  let isAudioPlaying = false;
   document.addEventListener('mousemove', event => {
     const cardEls = document.querySelectorAll('.photo-card');
     let mouseX = event.clientX;
@@ -20,16 +17,11 @@ export function cardHover() {
         mouseY >= elementY &&
         mouseY <= elementY + elementHeight
       ) {
-        if (!isAudioPlaying) {
-          audio.play();
-          isAudioPlaying = true;
-        }
         setTimeout(() => {
           cardEl.classList.add('hovered');
         }, 100);
       } else {
         cardEl.classList.remove('hovered');
-        isAudioPlaying = false;
       }
     });
   });

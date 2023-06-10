@@ -32,8 +32,8 @@ formEl.addEventListener('submit', elem => {
         Notiflix.Notify.success(`Знайшлось ${data.total} зображень)`);
         totalHits = data.total;
         toUpEl.style.opacity = '1';
-        toEndEl.style.opacity = '1';
         toDownEl.style.opacity = '1';
+        toEndEl.style.opacity = '1';
         toBeginningEl.style.opacity = '1';
         const lastCardEl = document.querySelector('.photo-card:last-child');
         if (lastCardEl) {
@@ -42,6 +42,7 @@ formEl.addEventListener('submit', elem => {
       }
     })
     .catch(() => {
+      console.error;
       Notiflix.Notify.failure('Ой, лишенько! Щось пішло не так..');
     })
     .finally(() => {
@@ -62,6 +63,7 @@ const scrollObserver = new IntersectionObserver(([entry], observer) => {
         }
       })
       .catch(error => {
+        console.error;
         Notiflix.Notify.failure('Ой, лишенько! Щось пішло не так..');
       });
   }
