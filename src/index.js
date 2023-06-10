@@ -1,22 +1,25 @@
+// import throttle from 'lodash.throttle';
 import Notiflix from 'notiflix';
-import throttle from 'lodash.throttle';
-import { cardHover } from './js/hover';
 import { fetchImages } from './js/fetch';
 import { createGallery } from './js/markup';
-import { galleryScroll } from './js/scroll';
+import { galleryScroll, galleryScrollAll } from './js/scroll';
 
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
 const toUpEl = document.querySelector('.to-up');
 const toDownEl = document.querySelector('.to-down');
+const toBeginningEl = document.querySelector('.to-beginning');
+const toEndEl = document.querySelector('.to-end');
 const perPage = 40;
-let page = 1;
+let totalHits = 0;
+let page;
 let q;
 
 formEl.addEventListener('submit', elem => {
   elem.preventDefault();
   q = elem.target.searchQuery.value.trim();
   galleryEl.innerHTML = '';
+  page = 1;
   if (q === '') {
     return Notiflix.Notify.warning('Треба щось вписати!');
   }
@@ -27,9 +30,18 @@ formEl.addEventListener('submit', elem => {
       } else {
         createGallery(data.hits);
         Notiflix.Notify.success(`Знайшлось ${data.total} зображень)`);
+        totalHits = data.total;
+        toUpEl.style.opacity = '1';
+        toDownEl.style.opacity = '1';
+        toBeginningEl.style.opacity = '1';
+        toEndEl.style.opacity = '1';
+        const lastCardEl = document.querySelector('.photo-card:last-child');
+        if (lastCardEl) {
+          scrollObserver.observe(lastCardEl);
+        }
       }
     })
-    .catch(error => {
+    .catch(() => {
       Notiflix.Notify.failure('Ой, лишенько! Щось пішло не так..');
     })
     .finally(() => {
@@ -37,31 +49,24 @@ formEl.addEventListener('submit', elem => {
     });
 });
 
-document.addEventListener(
-  'scroll',
-  throttle(() => {
-    const toUpEl = document.querySelector('.to-up');
-    const toDownEl = document.querySelector('.to-down');
-    const documentRect = document.documentElement.getBoundingClientRect();
-
-    if (documentRect.bottom < document.documentElement.clientHeight + 750) {
-      page += 1;
-      fetchImages(q, page, perPage).then(({ data }) => {
+const scrollObserver = new IntersectionObserver(([entry], observer) => {
+  if (entry.isIntersecting && galleryEl.childElementCount < totalHits) {
+    observer.unobserve(entry.target);
+    page += 1;
+    fetchImages(q, page, perPage)
+      .then(({ data }) => {
         createGallery(data.hits);
-      });
-    }
-    if (window.pageYOffset < document.documentElement.clientHeight) {
-      toUpEl.style.opacity = '0';
-      toDownEl.style.opacity = '0';
-    }
-    if (window.pageYOffset > document.documentElement.clientHeight) {
-      toUpEl.style.opacity = '1';
-      toDownEl.style.opacity = '1';
-    }
-  }, 200)
-);
 
-cardHover();
+        const lastCardEl = document.querySelector('.photo-card:last-child');
+        if (lastCardEl) {
+          scrollObserver.observe(lastCardEl);
+        }
+      })
+      .catch(error => {
+        Notiflix.Notify.failure('Ой, лишенько! Щось пішло не так..');
+      });
+  }
+});
 
 toUpEl.addEventListener('click', () => {
   galleryScroll('up');
@@ -69,4 +74,12 @@ toUpEl.addEventListener('click', () => {
 
 toDownEl.addEventListener('click', () => {
   galleryScroll('down');
+});
+
+toBeginningEl.addEventListener('click', () => {
+  galleryScrollAll('up');
+});
+
+toEndEl.addEventListener('click', () => {
+  galleryScrollAll('down');
 });

@@ -1,5 +1,6 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { cardHover } from './hover';
 
 export function createGallery(images) {
   const galleryEl = document.querySelector('.gallery');
@@ -27,4 +28,6 @@ export function createGallery(images) {
     captionsData: 'alt',
     captionDelay: 250,
   }).refresh();
+
+  cardHover();
 }

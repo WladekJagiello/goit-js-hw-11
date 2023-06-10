@@ -15,7 +15,8 @@ body {
 .search-form {
   display: flex;
   justify-content: center;
-  position: fixed;
+  position: absolute;
+  top: 5px;
   z-index: 99;
   left: 50%;
   transform: translateX(-50%);
@@ -62,7 +63,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin: 45px;
 }
 
 /* card */
@@ -71,7 +72,7 @@ body {
   position: relative;
   width: 240px;
   height: 160px;
-  margin: 10px;
+  margin: 5px;
   transform-style: preserve-3d;
   perspective: 800px;
   cursor: context-menu;
@@ -116,20 +117,33 @@ body {
 
 /* button */
 
+.to-beginning {
+  padding-top: 0;
+  padding-left: 1px;
+  bottom: calc(50% + 60px);
+}
+
+.to-end {
+  padding-left: 1px;
+  bottom: calc(50% - 60px);
+}
+
 .to-up {
-  bottom: calc(50% + 30px);
+  bottom: calc(50% + 20px);
 }
 
 .to-down {
   padding-top: 7px;
-  bottom: calc(50% - 30px);
+  bottom: calc(50% - 20px);
 }
 
+.to-beginning,
+.to-end,
 .to-down,
 .to-up {
   z-index: 9;
   position: fixed;
-  right: 30px;
+  right: 5px;
   width: 40px;
   height: 40px;
   opacity: 0;
@@ -138,6 +152,8 @@ body {
   cursor: pointer;
 }
 
+.to-beginning:hover,
+.to-end:hover,
 .to-down:hover,
 .to-up:hover {
   background-color: #c3c3c3;

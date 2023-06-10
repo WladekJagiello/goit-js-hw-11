@@ -17,7 +17,9 @@ export function cardHover() {
         mouseY >= elementY &&
         mouseY <= elementY + elementHeight
       ) {
-        cardEl.classList.add('hovered');
+        setTimeout(() => {
+          cardEl.classList.add('hovered');
+        }, 100);
       } else {
         cardEl.classList.remove('hovered');
       }
