@@ -20,19 +20,17 @@ export function cardHover() {
         mouseY >= elementY &&
         mouseY <= elementY + elementHeight
       ) {
+        if (!isAudioPlaying) {
+          audio.play();
+          isAudioPlaying = true;
+        }
         setTimeout(() => {
-          if (!isAudioPlaying) {
-            audio.play();
-            isAudioPlaying = true;
-          }
           cardEl.classList.add('hovered');
         }, 100);
       } else {
         cardEl.classList.remove('hovered');
+        isAudioPlaying = false;
       }
     });
-  });
-  document.addEventListener('mouseout', () => {
-    isAudioPlaying = false;
   });
 }
