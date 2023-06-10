@@ -1,4 +1,5 @@
 export function cardHover() {
+  const audio = new Audio('./skrip-odinochnyii-korotkii-nizkii.mp3');
   document.addEventListener('mousemove', event => {
     const cardEls = document.querySelectorAll('.photo-card');
     let mouseX = event.clientX;
@@ -17,6 +18,7 @@ export function cardHover() {
         mouseY >= elementY &&
         mouseY <= elementY + elementHeight
       ) {
+        audio.play();
         setTimeout(() => {
           cardEl.classList.add('hovered');
         }, 100);

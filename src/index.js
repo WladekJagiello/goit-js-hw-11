@@ -32,9 +32,9 @@ formEl.addEventListener('submit', elem => {
         Notiflix.Notify.success(`Знайшлось ${data.total} зображень)`);
         totalHits = data.total;
         toUpEl.style.opacity = '1';
+        toEndEl.style.opacity = '1';
         toDownEl.style.opacity = '1';
         toBeginningEl.style.opacity = '1';
-        toEndEl.style.opacity = '1';
         const lastCardEl = document.querySelector('.photo-card:last-child');
         if (lastCardEl) {
           scrollObserver.observe(lastCardEl);
@@ -56,7 +56,6 @@ const scrollObserver = new IntersectionObserver(([entry], observer) => {
     fetchImages(q, page, perPage)
       .then(({ data }) => {
         createGallery(data.hits);
-
         const lastCardEl = document.querySelector('.photo-card:last-child');
         if (lastCardEl) {
           scrollObserver.observe(lastCardEl);
