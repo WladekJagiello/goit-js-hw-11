@@ -10,7 +10,7 @@ const toUpEl = document.querySelector('.to-up');
 const toDownEl = document.querySelector('.to-down');
 const toBeginningEl = document.querySelector('.to-beginning');
 const toEndEl = document.querySelector('.to-end');
-let submittingForm = false;
+let submittingForm;
 const perPage = 40;
 let totalHits = 0;
 let page;
