@@ -80,7 +80,10 @@ window.addEventListener(
     if (!submittingForm) {
       const { scrollTop, clientHeight, scrollHeight } =
         document.documentElement;
-      if (scrollTop + clientHeight >= scrollHeight) {
+      if (
+        scrollTop + clientHeight >= scrollHeight &&
+        galleryEl.childElementCount >= totalHits
+      ) {
         Notiflix.Notify.warning('Ой, лишенько! Це кінець..');
       }
     }
