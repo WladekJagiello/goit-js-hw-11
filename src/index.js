@@ -23,6 +23,10 @@ formEl.addEventListener('submit', elem => {
   galleryEl.innerHTML = '';
   page = 1;
   if (q === '') {
+    toUpEl.style.opacity = '0';
+    toDownEl.style.opacity = '0';
+    toEndEl.style.opacity = '0';
+    toBeginningEl.style.opacity = '0';
     return Notiflix.Notify.warning('Треба щось вписати!');
   }
   fetchImages(q, page, perPage)
