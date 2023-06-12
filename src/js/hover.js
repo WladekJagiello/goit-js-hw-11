@@ -1,28 +1,43 @@
+import throttle from 'lodash.throttle';
+
 export function cardHover() {
-  document.addEventListener('mousemove', event => {
-    const cardEls = document.querySelectorAll('.photo-card');
-    let mouseX = event.clientX;
-    let mouseY = event.clientY;
+  const soundEl = document.querySelector('.sound');
+  const isSoundPlayed = new Map();
 
-    cardEls.forEach(cardEl => {
-      let elementRect = cardEl.getBoundingClientRect();
-      let elementX = elementRect.left;
-      let elementY = elementRect.top;
-      let elementWidth = elementRect.width;
-      let elementHeight = elementRect.height;
+  document.addEventListener(
+    'mousemove',
+    throttle(event => {
+      const cardEls = document.querySelectorAll('.photo-card');
+      let mouseX = event.clientX;
+      let mouseY = event.clientY;
 
-      if (
-        mouseX >= elementX &&
-        mouseX <= elementX + elementWidth &&
-        mouseY >= elementY &&
-        mouseY <= elementY + elementHeight
-      ) {
-        setTimeout(() => {
-          cardEl.classList.add('hovered');
-        }, 100);
-      } else {
-        cardEl.classList.remove('hovered');
-      }
-    });
-  });
+      cardEls.forEach(cardEl => {
+        let elementRect = cardEl.getBoundingClientRect();
+        let elementX = elementRect.left;
+        let elementY = elementRect.top;
+        let elementWidth = elementRect.width;
+        let elementHeight = elementRect.height;
+
+        if (
+          mouseX >= elementX &&
+          mouseX <= elementX + elementWidth &&
+          mouseY >= elementY &&
+          mouseY <= elementY + elementHeight
+        ) {
+          setTimeout(() => {
+            cardEl.classList.add('hovered');
+          }, 200);
+          if (!isSoundPlayed.has(cardEl)) {
+            soundEl.play();
+            isSoundPlayed.set(cardEl, true);
+          }
+        } else {
+          if (isSoundPlayed.has(cardEl)) {
+            isSoundPlayed.delete(cardEl);
+          }
+          cardEl.classList.remove('hovered');
+        }
+      });
+    }, 200)
+  );
 }

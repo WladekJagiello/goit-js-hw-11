@@ -18,6 +18,7 @@ export function createGallery(images) {
                     <p class="info-item"><b>Завантаження: </b> ${image.downloads}</p>
                   </div>
                 </a>
+                
               </div>`;
     })
     .join('');
