@@ -2,6 +2,7 @@ import throttle from 'lodash.throttle';
 
 export function cardHover() {
   const soundEl = document.querySelector('.sound');
+  soundEl.volume = 0.5;
   const isSoundPlayed = new Map();
 
   document.addEventListener(
