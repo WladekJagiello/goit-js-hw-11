@@ -25,10 +25,20 @@ export function createGallery(images) {
 
   galleryEl.innerHTML += card;
 
-  new SimpleLightbox('.gallery a', {
+  const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
   }).refresh();
+
+  lightbox.on('show.simplelightbox', () => {
+    const soundEl = document.querySelector('.sound');
+    soundEl.volume = 0;
+  });
+
+  lightbox.on('close.simplelightbox', () => {
+    const soundEl = document.querySelector('.sound');
+    soundEl.volume = 0.2;
+  });
 
   cardHover();
 }
