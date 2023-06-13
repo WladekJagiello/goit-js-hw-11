@@ -12,7 +12,7 @@ const toBeginningEl = document.querySelector('.to-beginning');
 const toEndEl = document.querySelector('.to-end');
 let submittingForm;
 const perPage = 40;
-let totalHits = 0;
+let totalHits;
 let page;
 let q;
 
@@ -39,16 +39,12 @@ formEl.addEventListener('submit', elem => {
         Notiflix.Notify.failure('Ой, лишенько! Такого не знайшлося(');
       } else {
         createGallery(data.hits);
-        Notiflix.Notify.success(`Знайшлось ${data.total} зображень)`);
+        Notiflix.Notify.success(`Знайшлось ${data.totalHits} зображень)`);
         totalHits = data.totalHits;
         toUpEl.style.opacity = '1';
         toDownEl.style.opacity = '1';
         toEndEl.style.opacity = '1';
         toBeginningEl.style.opacity = '1';
-        const lastCardEl = document.querySelector('.photo-card:last-child');
-        if (lastCardEl) {
-          scrollObserver.observe(lastCardEl);
-        }
       }
     })
     .catch(() => {
@@ -67,10 +63,6 @@ const scrollObserver = new IntersectionObserver(([entry], observer) => {
     fetchImages(q, page, perPage)
       .then(({ data }) => {
         createGallery(data.hits);
-        const lastCardEl = document.querySelector('.photo-card:last-child');
-        if (lastCardEl) {
-          scrollObserver.observe(lastCardEl);
-        }
       })
       .catch(() => {
         Notiflix.Notify.failure('Ой, лишенько! Щось пішло не так..');
@@ -81,17 +73,22 @@ const scrollObserver = new IntersectionObserver(([entry], observer) => {
 window.addEventListener(
   'scroll',
   throttle(() => {
+    const lastCardEl = document.querySelector('.photo-card:last-child');
+    if (lastCardEl) {
+      scrollObserver.observe(lastCardEl);
+    }
     if (!submittingForm) {
       const { scrollTop, clientHeight, scrollHeight } =
         document.documentElement;
       if (
         scrollTop + clientHeight >= scrollHeight &&
-        galleryEl.childElementCount >= totalHits
+        galleryEl.childElementCount >= totalHits &&
+        galleryEl.innerHTML !== ''
       ) {
         Notiflix.Notify.warning('Ой, лишенько! Це кінець..');
       }
     }
-  }, 200)
+  }, 250)
 );
 
 toUpEl.addEventListener('click', () => {

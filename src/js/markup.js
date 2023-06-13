@@ -32,12 +32,14 @@ export function createGallery(images) {
 
   lightbox.on('show.simplelightbox', () => {
     const soundEl = document.querySelector('.sound');
-    soundEl.volume = 0;
+    setTimeout(() => {
+      soundEl.volume = 0;
+    }, 1000);
   });
 
   lightbox.on('close.simplelightbox', () => {
     const soundEl = document.querySelector('.sound');
-    soundEl.volume = 0.2;
+    soundEl.volume = 0.1;
   });
 
   cardHover();
