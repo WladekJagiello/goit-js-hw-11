@@ -75,7 +75,9 @@ export function cardHover() {
         ) {
           isHovering = true;
           if (!cardEl.classList.contains('hovered')) {
-            cardEl.classList.add('hovered');
+            setTimeout(() => {
+              cardEl.classList.add('hovered');
+            }, 100);
             hoverTimeoutId = setTimeout(() => {
               soundEl.play();
             }, 500);
