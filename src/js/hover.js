@@ -49,7 +49,7 @@ import throttle from 'lodash.throttle';
 
 export function cardHover() {
   const soundEl = document.querySelector('.sound');
-  soundEl.volume = 0.1;
+  soundEl.volume = 0.6;
   let hoverTimeoutId = null;
 
   document.addEventListener(

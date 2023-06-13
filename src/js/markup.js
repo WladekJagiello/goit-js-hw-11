@@ -39,7 +39,7 @@ export function createGallery(images) {
 
   lightbox.on('close.simplelightbox', () => {
     const soundEl = document.querySelector('.sound');
-    soundEl.volume = 0.1;
+    soundEl.volume = 0.6;
   });
 
   cardHover();
