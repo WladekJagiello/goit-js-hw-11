@@ -34,7 +34,7 @@ export function cardHover() {
             if (!hoverTimeoutMap.has(cardEl)) {
               const hoverTimeoutId = setTimeout(() => {
                 soundEl.play();
-              }, 500);
+              }, 250);
               hoverTimeoutMap.set(cardEl, hoverTimeoutId);
             }
           }
