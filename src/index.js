@@ -11,6 +11,7 @@ const toDownEl = document.querySelector('.to-down');
 const toBeginningEl = document.querySelector('.to-beginning');
 const toEndEl = document.querySelector('.to-end');
 let submittingForm;
+let observing;
 const perPage = 40;
 let totalHits;
 let page;
@@ -27,7 +28,7 @@ formEl.addEventListener('submit', elem => {
     toDownEl.style.opacity = '0';
     toEndEl.style.opacity = '0';
     toBeginningEl.style.opacity = '0';
-    return Notiflix.Notify.warning('Треба щось вписати!');
+    return Notiflix.Notify.warning('Please write what you want to find.');
   }
   fetchImages(q, page, perPage)
     .then(({ data }) => {
@@ -36,10 +37,12 @@ formEl.addEventListener('submit', elem => {
         toDownEl.style.opacity = '0';
         toEndEl.style.opacity = '0';
         toBeginningEl.style.opacity = '0';
-        Notiflix.Notify.failure('Ой, лишенько! Такого не знайшлося(');
+        Notiflix.Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.'
+        );
       } else {
         createGallery(data.hits);
-        Notiflix.Notify.success(`Знайшлось ${data.totalHits} зображень)`);
+        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
         totalHits = data.totalHits;
         toUpEl.style.opacity = '1';
         toDownEl.style.opacity = '1';
@@ -48,7 +51,9 @@ formEl.addEventListener('submit', elem => {
       }
     })
     .catch(() => {
-      Notiflix.Notify.failure('Ой, лишенько! Щось пішло не так..');
+      Notiflix.Notify.failure(
+        'Unfortunately, an error occurred. Please try again.'
+      );
     })
     .finally(() => {
       formEl.reset();
@@ -59,13 +64,17 @@ formEl.addEventListener('submit', elem => {
 const scrollObserver = new IntersectionObserver(([entry], observer) => {
   if (entry.isIntersecting && galleryEl.childElementCount < totalHits) {
     observer.unobserve(entry.target);
+    observing = true;
     page += 1;
     fetchImages(q, page, perPage)
       .then(({ data }) => {
         createGallery(data.hits);
+        observing = false;
       })
       .catch(() => {
-        Notiflix.Notify.failure('Ой, лишенько! Щось пішло не так..');
+        Notiflix.Notify.failure(
+          'Unfortunately, an error occurred. Please try again.'
+        );
       });
   }
 });
@@ -74,7 +83,7 @@ window.addEventListener(
   'scroll',
   throttle(() => {
     const lastCardEl = document.querySelector('.photo-card:last-child');
-    if (lastCardEl) {
+    if (!observing && lastCardEl) {
       scrollObserver.observe(lastCardEl);
     }
     if (!submittingForm) {
@@ -83,9 +92,12 @@ window.addEventListener(
       if (
         scrollTop + clientHeight >= scrollHeight &&
         galleryEl.childElementCount >= totalHits &&
+        galleryEl.scrollHeight > window.innerHeight &&
         galleryEl.innerHTML !== ''
       ) {
-        Notiflix.Notify.warning('Ой, лишенько! Це кінець..');
+        Notiflix.Notify.warning(
+          'We`re sorry, but you`ve reached the end of search results.'
+        );
       }
     }
   }, 250)

@@ -13,14 +13,15 @@ export function galleryScroll(direction) {
 }
 
 export function galleryScrollAll(direction) {
-  const gallery = document.querySelector('.gallery');
-  const formEl = document.querySelector('.search-form');
-  const beginning = formEl;
-  const end = gallery.lastElementChild;
-
   if (direction === 'up') {
-    beginning.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   } else {
-    end.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
   }
 }
