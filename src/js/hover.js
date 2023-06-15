@@ -41,7 +41,9 @@ export function cardHover() {
         } else {
           cardEl.classList.remove('hovered');
           if (hoverTimeoutMap.has(cardEl)) {
-            hoverTimeoutMap.clear();
+            const hoverTimeoutId = hoverTimeoutMap.get(cardEl);
+            clearTimeout(hoverTimeoutId);
+            hoverTimeoutMap.delete(cardEl);
             soundEl.pause();
             soundEl.currentTime = 0;
           }
