@@ -30,7 +30,7 @@ export function cardHover() {
           if (!cardEl.classList.contains('hovered')) {
             setTimeout(() => {
               cardEl.classList.add('hovered');
-            }, 200);
+            }, 100);
             if (!hoverTimeoutMap.has(cardEl)) {
               const hoverTimeoutId = setTimeout(() => {
                 soundEl.play();
@@ -44,7 +44,6 @@ export function cardHover() {
             const hoverTimeoutId = hoverTimeoutMap.get(cardEl);
             clearTimeout(hoverTimeoutId);
             hoverTimeoutMap.clear();
-            // hoverTimeoutMap.delete(cardEl);
             soundEl.pause();
             soundEl.currentTime = 0;
           }

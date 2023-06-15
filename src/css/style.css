@@ -87,7 +87,7 @@ body {
   border-radius: 5px;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  transition: transform 1s ease-in-out;
+  transition: transform 0.8s ease-in-out;
 }
 
 .gallery-img {
