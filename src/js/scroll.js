@@ -8,7 +8,8 @@ export function galleryScroll(direction) {
   }
   window.scrollBy({
     top: scrollByN,
-    behavior: 'auto',
+    // behavior: 'auto',
+    behavior: 'smooth',
   });
 }
 
