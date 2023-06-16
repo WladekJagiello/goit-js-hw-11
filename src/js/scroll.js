@@ -8,7 +8,7 @@ export function galleryScroll(direction) {
   }
   window.scrollBy({
     top: scrollByN,
-    behavior: 'smooth',
+    behavior: 'auto',
   });
 }
 
@@ -16,11 +16,13 @@ export function galleryScrollAll(direction) {
   if (direction === 'up') {
     window.scrollTo({
       top: 0,
+      // behavior: 'instant',
       behavior: 'smooth',
     });
   } else {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
+      // behavior: 'instant',
       behavior: 'smooth',
     });
   }

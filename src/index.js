@@ -61,23 +61,32 @@ formEl.addEventListener('submit', elem => {
     });
 });
 
-const scrollObserver = new IntersectionObserver(([entry], observer) => {
-  if (entry.isIntersecting && galleryEl.childElementCount < totalHits) {
-    observer.unobserve(entry.target);
-    observing = true;
-    page += 1;
-    fetchImages(q, page, perPage)
-      .then(({ data }) => {
-        createGallery(data.hits);
-        observing = false;
-      })
-      .catch(() => {
-        Notiflix.Notify.failure(
-          'Unfortunately, an error occurred. Please try again.'
-        );
-      });
+const scrollObserver = new IntersectionObserver(
+  ([entry], observer) => {
+    if (entry.isIntersecting && galleryEl.childElementCount < totalHits) {
+      observer.unobserve(entry.target);
+      observing = true;
+      page += 1;
+      fetchImages(q, page, perPage)
+        .then(({ data }) => {
+          createGallery(data.hits);
+        })
+        .catch(() => {
+          Notiflix.Notify.failure(
+            'Unfortunately, an error occurred. Please try again.'
+          );
+        })
+        .finally(() => {
+          observing = false;
+        });
+    }
+  },
+  {
+    root: null,
+    rootMargin: '600px',
+    threshold: 0.5,
   }
-});
+);
 
 window.addEventListener(
   'scroll',
