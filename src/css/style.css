@@ -2,6 +2,7 @@ body {
   height: calc(100vh - 30px);
   background: linear-gradient(90deg, rgb(51, 1, 63), rgb(4, 73, 78));
   overflow: hidden;
+  overflow-y: scroll;
 }
 
 #particles-js {
