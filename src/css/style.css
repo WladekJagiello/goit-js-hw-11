@@ -16,11 +16,11 @@ body {
 .search-form {
   display: flex;
   justify-content: center;
-  position: absolute;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
   top: 5px;
-  z-index: 99;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: 9;
 }
 
 .search-form input {
@@ -64,7 +64,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 45px;
+  margin-top: 10px;
 }
 
 /* card */
