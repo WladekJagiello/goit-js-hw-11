@@ -44,7 +44,7 @@ formEl.addEventListener('submit', elem => {
         createGallery(data.hits);
         Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
         totalHits = data.totalHits;
-        if (galleryEl.scrollHeight > window.innerHeight) {
+        if (galleryEl.scrollHeight >= window.innerHeight) {
           toUpEl.style.opacity = '1';
           toDownEl.style.opacity = '1';
           toEndEl.style.opacity = '1';
