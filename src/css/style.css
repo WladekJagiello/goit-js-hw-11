@@ -16,7 +16,8 @@ body {
 .search-form {
   position: absolute;
   display: flex;
-  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 10px;
   top: 5px;
   z-index: 99;
