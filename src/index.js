@@ -49,6 +49,11 @@ formEl.addEventListener('submit', elem => {
           toDownEl.style.opacity = '1';
           toEndEl.style.opacity = '1';
           toBeginningEl.style.opacity = '1';
+        } else {
+           toUpEl.style.opacity = '0';
+           toDownEl.style.opacity = '0';
+           toEndEl.style.opacity = '0';
+           toBeginningEl.style.opacity = '0';
         }
       }
     })
